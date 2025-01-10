@@ -28,6 +28,6 @@ jobs:
         #login
         echo ${{secrets.DOCKER_TOKEN}} | docker login -u nikosnikolaidis --password-stdin
         #build
-        docker build -t nikosnikolaidis/master-test-2 .
+        docker build -t nikosnikolaidis/master-test-2:$(date +'%Y-%m-%d') .
         #push
-        docker push nikosnikolaidis/master-test-2
+        docker push nikosnikolaidis/master-test-2:$(date +'%Y-%m-%d')
