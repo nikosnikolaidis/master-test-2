@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+
+  backend:
+    container_name: backend
+    #image: nikosnikolaidis/master-test-2
+    build: 
+      context: .
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgres://db:5432/test
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - '8080:8080'
+
+  db:
+    container_name: db
+    image: postgres:14.7
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=test
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+
+volumes:
+  postgres_data:
